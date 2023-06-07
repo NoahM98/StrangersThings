@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { fetchPosts } from "../api/ajax-helpers";
 
 const PostCards = () => {
-    const [userPosts, setUserPosts] = useState(null);
+    const [userPosts, setUserPosts] = useState([]);
 
     useEffect(() => {
         const postsPromise = fetchPosts();
         Promise.all([postsPromise])
-            .then(data => setUserPosts(data[0]));
+            .then(res => setUserPosts(res[0].data.posts));
     }, [])
 
     useEffect(() => {
@@ -16,8 +16,8 @@ const PostCards = () => {
 
     return (
         <>
-            {userPosts ?
-                userPosts.data.posts.map((el, ind) => {
+            {
+                userPosts.map((el, ind) => {
                     return (
                         <div key={ind + el}>
                             <h2>{el.title}</h2>
@@ -26,7 +26,8 @@ const PostCards = () => {
                             <p>{el.description}</p>
                         </div>
                     )
-                }) : null}
+                })
+            }
         </>
     )
 }
