@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { fetchPosts } from "../api/ajax-helpers";
 
 const COHORT_NAME = '2303-ftb-et-web-pt'
 const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`
@@ -7,18 +8,9 @@ const PostCards = () => {
     const [userPosts, setUserPosts] = useState(null);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch(`${BASE_URL}/posts`)
-
-                const result = await response.json();
-                console.log(result);
-                setUserPosts(result);
-            } catch (err) {
-                console.error(err);
-            }
-        }
-        fetchData();
+        const postsPromise = fetchPosts();
+        Promise.all([postsPromise])
+            .then(data => setUserPosts(data[0]));
     }, [])
 
     useEffect(() => {
