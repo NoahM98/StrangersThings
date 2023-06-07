@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { fetchPosts } from "../api/ajax-helpers";
 
-const COHORT_NAME = '2303-ftb-et-web-pt'
-const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`
-
 const PostCards = () => {
     const [userPosts, setUserPosts] = useState(null);
 
