@@ -1,13 +1,13 @@
-import React,{useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Registration from "./Registration";
 
-const Login=()=> {
+const Login = () => {
   return (
     <div>
-    <h1>
-      Login/LogOut
-    </h1>
-    <Registration/>
+      <h1>
+        Login/LogOut
+      </h1>
+      <Registration />
     </div>
   )
 }

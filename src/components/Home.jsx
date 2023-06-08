@@ -1,13 +1,13 @@
 import React from "react";
 import PostCards from "./PostCards.jsx";
 
-const Home=()=> {
+const Home = () => {
   return (
     <div>
-      <h1> Home </h1>
-      <PostCards /> 
+      <h1>Home</h1>
+      <PostCards />
     </div>
   )
 }
 
-export default Home; 
+export default Home;
