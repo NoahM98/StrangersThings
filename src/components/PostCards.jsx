@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { fetchPosts } from "../api/ajax-helpers";
 
-const PostCards = ({userPosts, setUserPosts}) => {
-
+const PostCards = ({ userPosts, setUserPosts }) => {
 
     useEffect(() => {
         const postsPromise = fetchPosts();
