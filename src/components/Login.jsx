@@ -5,11 +5,12 @@ import Registration from "./Registration";
 const Login = ({ isLoggedIn, setIsLoggedIn, token, setToken }) => {
   return (
     <div>
-      <h1>
-        Login/LogOut
-      </h1>
-      <LoginForm setIsLoggedIn={setIsLoggedIn} setToken={setToken} />
-      <Registration setIsLoggedIn={setIsLoggedIn} setToken={setToken} />
+      {!isLoggedIn ?
+        <>
+          <LoginForm setIsLoggedIn={setIsLoggedIn} setToken={setToken} />
+          <Registration setIsLoggedIn={setIsLoggedIn} setToken={setToken} />
+        </>
+        : <h1>You are Logged In</h1>}
     </div>
   )
 }

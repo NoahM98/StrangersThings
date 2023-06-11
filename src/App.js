@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Posts from "./components/Posts";
+import Profile from "./components/Profile";
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -29,6 +30,9 @@ function App() {
                             <Link to="/Posts">Posts</Link>
                         </li>
                         <li>
+                            <Link to="/Profile">Profile</Link>
+                        </li>
+                        <li>
                             <Link to="/Login">Login</Link>
                         </li>
                     </ul>
@@ -50,6 +54,9 @@ function App() {
                             token={token}
                             setToken={setToken}
                         />
+                    </Route>
+                    <Route path="/Profile">
+                        <Profile />
                     </Route>
                 </div>
             </div>

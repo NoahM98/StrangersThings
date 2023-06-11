@@ -21,8 +21,10 @@ const PostCards = ({ userPosts, setUserPosts }) => {
                         <div key={ind + el}>
                             <h2>{el.title}</h2>
                             <h3>{el.author.username}</h3>
-                            <p>{el.price}</p>
-                            <p>{el.description}</p>
+                            <p>Price: {el.price}</p>
+                            <p>Description: {el.description}</p>
+                            <p>Location: {el.location}</p>
+                            <p>Will Deliver: {el.willDeliver ? "yes" : "no"}</p>
                         </div>
                     )
                 })

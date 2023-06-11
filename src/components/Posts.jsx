@@ -7,7 +7,8 @@ const Posts = ({ isLoggedIn, token }) => {
   return (
     <div>
       <h1>Posts</h1>
-      <CreatePost userPosts={userPosts} setUserPosts={setUserPosts} token={token} />
+      {isLoggedIn ?
+        <CreatePost userPosts={userPosts} setUserPosts={setUserPosts} token={token} /> : null}
       <PostCards userPosts={userPosts} setUserPosts={setUserPosts} />
     </div>
   )

@@ -4,6 +4,7 @@ export const fetchPosts = async () => {
     try {
         const response = await fetch(`${BASE_URL}/posts`);
         const result = await response.json();
+        console.log(result);
         return result;
     } catch (err) {
         console.error(err);
@@ -48,11 +49,36 @@ export const registerUser = async (username, password) => {
             }),
         });
         const result = await response.json();
-        // You can log ▲▲▲ the result
-        // here ▼▼▼ to view the json object before returning it
         console.log(result);
         return result;
     } catch (err) {
         console.error(err);
     }
 };
+
+export const makePost = async (token, title, description, price, location, willDeliver) => {
+
+    try {
+        const response = await fetch(`${BASE_URL}/posts`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                post: {
+                    "title": title,
+                    "description": description,
+                    "price": price,
+                    "location": location,
+                    "willDeliver": willDeliver
+                }
+            })
+        });
+        const result = await response.json();
+        console.log(result);
+        return result
+    } catch (err) {
+        console.error(err);
+    }
+}

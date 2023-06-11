@@ -1,8 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { makePost } from "../api/ajax-helpers";
 
-const CreatePost = ({ userPosts, setUserPosts }) => {
+const CreatePost = ({ userPosts, setUserPosts, token }) => {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [price, setPrice] = useState('');
+  const [location, setLocation] = useState('');
+  const [willDeliver, setWillDeliver] = useState(false);
+  useEffect(() => {
+    console.log(willDeliver);
+  }, [willDeliver]);
   return (
-    <form>
+    <form onSubmit={async (event) => {
+      event.preventDefault()
+      const newPromise = await makePost(token, title, description, price, location, willDeliver);
+      Promise.all([newPromise])
+        .then((result) => {
+          console.log(result[0]);
+          setUserPosts([result[0].data.post, ...userPosts]);
+        })
+      // console.log(result.data.post);
+      // if (result.success === true) {
+      //   console.log("Valid Post");
+      //   await setUserPosts([result.data.post, ...userPosts]);
+      // } else {
+      //   console.log("Invalid Post");
+      // }
+    }}>
       <h2>Create Post</h2>
       <fieldset>
         <div>
@@ -13,6 +37,10 @@ const CreatePost = ({ userPosts, setUserPosts }) => {
             id="title"
             type="text"
             required
+            value={title}
+            onChange={(event) => {
+              setTitle(event.target.value);
+            }}
           />
         </div>
         <div>
@@ -22,6 +50,10 @@ const CreatePost = ({ userPosts, setUserPosts }) => {
           <textarea
             id="description"
             required
+            value={description}
+            onChange={(event) => {
+              setDescription(event.target.value);
+            }}
           />
         </div>
         <div>
@@ -32,6 +64,10 @@ const CreatePost = ({ userPosts, setUserPosts }) => {
             id="price"
             type="text"
             required
+            value={price}
+            onChange={(event) => {
+              setPrice(event.target.value);
+            }}
           />
         </div>
         <div>
@@ -41,6 +77,10 @@ const CreatePost = ({ userPosts, setUserPosts }) => {
           <input
             id="location"
             type="text"
+            value={location}
+            onChange={(event) => {
+              setLocation(event.target.value);
+            }}
           />
         </div>
         <div>
@@ -50,8 +90,12 @@ const CreatePost = ({ userPosts, setUserPosts }) => {
           <input
             id="willDeliver"
             type="checkbox"
+            onChange={(event) => {
+              setWillDeliver(!willDeliver);
+            }}
           />
         </div>
+        <button type="submit">Create Post</button>
       </fieldset>
     </form>
   )
