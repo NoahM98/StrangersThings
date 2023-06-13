@@ -11,9 +11,9 @@ const CreatePost = ({ userPosts, setUserPosts, token }) => {
     console.log(willDeliver);
   }, [willDeliver]);
   return (
-    <form onSubmit={async (event) => {
+    <form onSubmit={ (event) => {
       event.preventDefault()
-      const newPromise = await makePost(token, title, description, price, location, willDeliver);
+      const newPromise = makePost(token, title, description, price, location, willDeliver);
       Promise.all([newPromise])
         .then((result) => {
           console.log(result[0]);

@@ -11,8 +11,8 @@ const AuthorPosts = ({token, myPosts, setMyPosts}) => {
         .then(res => setMyPosts(res[0].data.posts))
 }, [])
 
-  const handleDelete = async () => {
-    const result = await deletePost(token, el._id);
+  const handleDelete = async (token, id) => {
+    const result = await deletePost(token, id);
         if (result.success === true) {
           alert('You have successfully deleted your post.');
           const newPosts = myPosts.filter((el)=> {
@@ -41,16 +41,8 @@ const AuthorPosts = ({token, myPosts, setMyPosts}) => {
             <p>Will Deliver: {el.willDeliver ? "yes" : "no"}</p>
             <button>Update</button>
             <button onClick={()=>{
-              setPostId(el._id)
-              // const result = deletePost(token, el._id);
-              // if (result.success === true) {
-              //   alert('You have successfully deleted your post.');
-              //   const newPosts = myPosts.filter((el)=> {
-              //     return (
-              //       el._id !== postId
-              //     )
-              //   })
-              // } 
+              setPostId(el._id);
+              handleDelete(token, el._id)
             }}>Delete</button>
         </div>
      )}) : null}
