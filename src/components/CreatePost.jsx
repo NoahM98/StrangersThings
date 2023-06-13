@@ -11,7 +11,7 @@ const CreatePost = ({ userPosts, setUserPosts, token }) => {
     console.log(willDeliver);
   }, [willDeliver]);
   return (
-    <form onSubmit={ (event) => {
+    <form onSubmit={(event) => {
       event.preventDefault()
       const newPromise = makePost(token, title, description, price, location, willDeliver);
       Promise.all([newPromise])
