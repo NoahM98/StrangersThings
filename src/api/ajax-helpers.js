@@ -11,6 +11,23 @@ export const fetchPosts = async () => {
   }
 };
 
+export const authorizedFetchPosts = async (token) => {
+  try {
+    const response = await fetch(`${BASE_URL}/posts`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      }
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const loginUser = async (username, password) => {
   try {
     const response = await fetch(`${BASE_URL}/users/login`, {
@@ -120,3 +137,25 @@ export const deletePost = async (token, postId) => {
     console.error(err);
   }
 };
+
+export const postMessage = async (postId, token, message) => {
+  try {
+    const response = await fetch(`${BASE_URL}/posts/${postId}/messages`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        message: {
+          content: message
+        }
+      })
+    });
+    const result = await response.json();
+    console.log(result);
+    return result
+  } catch (err) {
+    console.error(err);
+  }
+}
