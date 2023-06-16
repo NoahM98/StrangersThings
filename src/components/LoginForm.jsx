@@ -4,11 +4,7 @@ import { loginUser } from "../api/ajax-helpers";
 const LoginForm = ({ setIsLoggedIn, setToken }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [response, setResponse] = useState('');
 
-    useEffect(() => {
-        console.log(response);
-    }, [response])
 
     return (
         <form onSubmit={async (event) => {
@@ -16,12 +12,12 @@ const LoginForm = ({ setIsLoggedIn, setToken }) => {
             if (username.length >= 6 && password.length >= 6 &&
                 !(username.indexOf(' ') >= 0) && !(password.indexOf(' ') >= 0)) {
                 console.log("Valid Form")
-                const result = await loginUser(username, password, setResponse);
-                setResponse(result);
+                const result = await loginUser(username, password);
                 if (result.data !== null) {
                     alert(result.data.message);
                     setIsLoggedIn(true);
                     setToken(result.data.token);
+                    localStorage.setItem("token", result.data.token);
                 } else {
                     alert(result.error.message);
                 }

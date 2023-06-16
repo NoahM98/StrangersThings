@@ -33,7 +33,7 @@ const PostCard = ({ userPosts, setUserPosts, isLoggedIn, token, el }) => {
                             const response = await postMessage(el._id, token, message);
                             console.log(response)
                             if (response.success) {
-                                await el.messages.push(response.data.message);
+                                // await setMessageList ([response.data.messages, ...messageList]);
                                 alert(`You've sent a message to ${el.author.username}`)
                             } else {
                                 alert('Failed send message');

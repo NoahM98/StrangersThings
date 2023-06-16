@@ -10,7 +10,17 @@ const Login = ({ isLoggedIn, setIsLoggedIn, token, setToken }) => {
           <LoginForm setIsLoggedIn={setIsLoggedIn} setToken={setToken} />
           <Registration setIsLoggedIn={setIsLoggedIn} setToken={setToken} />
         </>
-        : <h1>You are Logged In</h1>}
+        : 
+        <>
+        <h1>You are Logged In</h1>
+        <button onClick={()=> {
+          setIsLoggedIn(false);
+          setToken('');
+          localStorage.removeItem("token");
+        }}>Logout</button>
+        </>
+        }
+        
     </div>
   )
 }
