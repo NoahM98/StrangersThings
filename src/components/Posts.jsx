@@ -8,6 +8,7 @@ const Posts = ({ isLoggedIn, token }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
+    console.log(`LoggedIn: ${isLoggedIn}`)
     if (isLoggedIn) {
       const postsPromise = authorizedFetchPosts(token);
       Promise.all([postsPromise])
@@ -17,23 +18,23 @@ const Posts = ({ isLoggedIn, token }) => {
       Promise.all([postsPromise])
         .then(res => setUserPosts(res[0].data.posts));
     }
-  }, [])
+  }, [isLoggedIn])
 
-  
+
   function postMatches(post, text) {
     if (post.title.includes(text) || post.description.includes(text) || post.price.includes(text) || post.location.includes(text)) {
       return true;
-  
+
     } else {
       return false;
     }
   }
-  
+
   const filteredPosts = userPosts.filter(post => postMatches(post, searchTerm));
-  
+
 
   const postsToDisplay = searchTerm.length ? filteredPosts : userPosts;
-  
+
 
   useEffect(() => {
     console.log(userPosts)
@@ -46,11 +47,11 @@ const Posts = ({ isLoggedIn, token }) => {
         <label htmlFor="search">
           Search Posts:
         </label>
-        <input id="search" type="text" value={searchTerm} 
-        onChange={(event) => {
-          setSearchTerm(event.target.value);
+        <input id="search" type="text" value={searchTerm}
+          onChange={(event) => {
+            setSearchTerm(event.target.value);
 
-        }}/>
+          }} />
       </form>
       {isLoggedIn ?
         <CreatePost userPosts={userPosts} setUserPosts={setUserPosts} token={token} /> : null}

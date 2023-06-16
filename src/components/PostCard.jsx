@@ -7,7 +7,7 @@ const PostCard = ({ userPosts, setUserPosts, isLoggedIn, token, el }) => {
 
     useEffect(() => {
         setMessageList(el.messages);
-    }, [])
+    }, [userPosts]);
 
     return (
         <div>
@@ -17,9 +17,9 @@ const PostCard = ({ userPosts, setUserPosts, isLoggedIn, token, el }) => {
             <p>Description: {el.description}</p>
             <p>Location: {el.location}</p>
             <p>Will Deliver: {el.willDeliver ? "yes" : "no"}</p>
-            {messageList.map((element) => {
+            {messageList.map((element, ind) => {
                 return (
-                    <div key={el._id}>
+                    <div key={element._id + ind}>
                         <h4>From: {element.fromUser.username}</h4>
                         <p>{element.content}</p>
                     </div>
