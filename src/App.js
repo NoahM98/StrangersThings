@@ -4,6 +4,11 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import Posts from "./components/Posts";
 import Profile from "./components/Profile";
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import { LinkContainer } from 'react-router-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -24,23 +29,30 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <h1>Stranger's Things</h1>
-        <div>
-          <ul>
-            <li>
-              <Link to="/Home">Home</Link>
-            </li>
-            <li>
-              <Link to="/Posts">Posts</Link>
-            </li>
-            <li>
-              <Link to="/Profile">Profile</Link>
-            </li>
-            <li>
-              <Link to="/Login">Login</Link>
-            </li>
-          </ul>
-        </div>
+        <Navbar bg="danger" variant="dark" expand="lg">
+          <Container>
+            <LinkContainer to="/">
+              <Navbar.Brand>Stranger's Things</Navbar.Brand>
+            </LinkContainer>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="mr-auto">
+                <LinkContainer to="/Home">
+                  <Nav.Link>Home</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/Posts">
+                  <Nav.Link>Posts</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/Profile">
+                  <Nav.Link>Profile</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/Login">
+                  <Nav.Link>Login</Nav.Link>
+                </LinkContainer>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
         <div>
           <Route path="/Home">
             <Home />

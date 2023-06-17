@@ -3,9 +3,9 @@ import PostCards from "./PostCard.jsx";
 
 const Home = () => {
   return (
-    <div>
-      <h1>Home</h1>
-      <h2>Welcome to Stranger's Things</h2>
+    <div id="home-page">
+      <h1>Welcome to Stranger's Things</h1>
+      <h2>(A Craigslist Lite by Noah and Brandon)</h2>
     </div>
   )
 }

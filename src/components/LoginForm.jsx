@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { loginUser } from "../api/ajax-helpers";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 const LoginForm = ({ setIsLoggedIn, setToken }) => {
     const [username, setUsername] = useState('');
@@ -7,7 +9,7 @@ const LoginForm = ({ setIsLoggedIn, setToken }) => {
 
 
     return (
-        <form onSubmit={async (event) => {
+        <Form className="form m-5 p-3 border border-3 border-danger rounded" onSubmit={async (event) => {
             event.preventDefault();
             if (username.length >= 6 && password.length >= 6 &&
                 !(username.indexOf(' ') >= 0) && !(password.indexOf(' ') >= 0)) {
@@ -27,44 +29,42 @@ const LoginForm = ({ setIsLoggedIn, setToken }) => {
 
         }}>
             <h2>Login</h2>
-            <fieldset>
-                <div>
-                    <label htmlFor="user-name">
-                        Username:
-                    </label>
-                    <input
-                        id="user-name"
-                        type="text"
-                        placeholder="Enter Username"
-                        required
-                        value={username}
-                        onChange={(event) => {
-                            setUsername(event.target.value);
 
-                        }}
+            <Form.Group className="m-2">
+                <Form.Label htmlFor="user-name">
+                    Username:
+                </Form.Label>
+                <Form.Control
+                    id="user-name"
+                    type="text"
+                    placeholder="Enter Username"
+                    required
+                    value={username}
+                    onChange={(event) => {
+                        setUsername(event.target.value);
 
-                    />
-                </div>
-                <div>
-                    <label htmlFor="pass-word">
-                        Password:
-                    </label>
-                    <input
-                        id="pass-word"
-                        type="password"
-                        placeholder="Enter Password"
-                        required
-                        value={password}
-                        onChange={(event) => {
-                            setPassword(event.target.value);
+                    }}
+                />
+            </Form.Group>
+            <Form.Group className="m-2">
+                <Form.Label htmlFor="pass-word">
+                    Password:
+                </Form.Label>
+                <Form.Control
+                    id="pass-word"
+                    type="password"
+                    placeholder="Enter Password"
+                    required
+                    value={password}
+                    onChange={(event) => {
+                        setPassword(event.target.value);
 
-                        }}
+                    }}
 
-                    />
-                </div>
-                <button type='submit'>Submit</button>
-            </fieldset>
-        </form>
+                />
+            </Form.Group>
+            <Button className="m-2" variant="secondary" type='submit'>Submit</Button>
+        </Form>
     )
 }
 
