@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { postMessage } from "../api/ajax-helpers";
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import Form from 'react-bootstrap/Form';
+
 
 const PostCard = ({ userPosts, setUserPosts, isLoggedIn, token, el }) => {
     const [message, setMessage] = useState('');
@@ -10,24 +14,31 @@ const PostCard = ({ userPosts, setUserPosts, isLoggedIn, token, el }) => {
     }, [userPosts]);
 
     return (
-        <div>
-            <h2>{el.title}</h2>
-            <h3>{el.author.username}</h3>
-            <p>Price: {el.price}</p>
-            <p>Description: {el.description}</p>
-            <p>Location: {el.location}</p>
-            <p>Will Deliver: {el.willDeliver ? "yes" : "no"}</p>
+        <Card>
+            <Card.Body>
+            <Card.Title>{el.title}</Card.Title>
+            <Card.Subtitle>{el.author.username}</Card.Subtitle>
+            <Card.Text>Price: {el.price}</Card.Text>
+            <Card.Text>Description: {el.description}</Card.Text>
+            <Card.Text>Location: {el.location}</Card.Text>
+            <Card.Text>Will Deliver: {el.willDeliver ? "yes" : "no"}</Card.Text>
+
+            { messageList.length ? 
+            <Card.Text>Messages:</Card.Text> : null
+}       
             {messageList.map((element, ind) => {
                 return (
-                    <div key={element._id + ind}>
-                        <h4>From: {element.fromUser.username}</h4>
-                        <p>{element.content}</p>
-                    </div>
+                    <Card key={element._id + ind}>
+                        <Card.Body>
+                        <Card.Title>From: {element.fromUser.username}</Card.Title>
+                        <Card.Text>{element.content}</Card.Text>
+                        </Card.Body>
+                    </Card>
                 )
             })}
             {el.isAuthor ?
                 null : isLoggedIn ?
-                    <form onSubmit={async (event) => {
+                    <Form onSubmit={async (event) => {
                         event.preventDefault();
                         if (message) {
                             const response = await postMessage(el._id, token, message);
@@ -41,16 +52,21 @@ const PostCard = ({ userPosts, setUserPosts, isLoggedIn, token, el }) => {
                             setMessage('');
                         }
                     }}>
-                        <textarea
+                        <Form.Group>
+                            <Form.Label htmlFor="send-message">Send Message</Form.Label>
+                        <Form.Control
+                        as="textarea" rows={2}
                             required
                             value={message}
                             onChange={(event) => {
                                 setMessage(event.target.value);
                             }}
                         />
-                        <button type='submit' >Send Message</button>
-                    </form> : null}
-        </div>
+                        <Button variant="secondary" type='submit' >Send</Button>
+                        </Form.Group>
+                    </Form> : null}
+            </Card.Body>
+        </Card>
     )
 }
 

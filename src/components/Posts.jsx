@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PostCard from "./PostCard";
 import CreatePost from "./CreatePost";
 import { fetchPosts, authorizedFetchPosts } from "../api/ajax-helpers";
+import Form from 'react-bootstrap/Form';
 
 const Posts = ({ isLoggedIn, token }) => {
   const [userPosts, setUserPosts] = useState([]);
@@ -41,25 +42,29 @@ const Posts = ({ isLoggedIn, token }) => {
   }, [userPosts]);
 
   return (
-    <div>
+    <div id="post-page">
       <h1>Posts</h1>
-      <form>
-        <label htmlFor="search">
+      <Form id="search-bar">
+        <Form.Group>
+        <Form.Label htmlFor="search">
           Search Posts:
-        </label>
-        <input id="search" type="text" value={searchTerm}
+        </Form.Label>
+        <Form.Control id="search" type="text" value={searchTerm}
           onChange={(event) => {
             setSearchTerm(event.target.value);
 
           }} />
-      </form>
+          </Form.Group>
+      </Form>
       {isLoggedIn ?
         <CreatePost userPosts={userPosts} setUserPosts={setUserPosts} token={token} /> : null}
+        <div id="posts">
       {postsToDisplay.map((el) => {
         return (
           <PostCard key={el._id} userPosts={userPosts} setUserPosts={setUserPosts} isLoggedIn={isLoggedIn} token={token} el={el} />
         )
       })}
+      </div>
     </div>
   )
 }

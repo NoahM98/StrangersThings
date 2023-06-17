@@ -4,11 +4,11 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import Posts from "./components/Posts";
 import Profile from "./components/Profile";
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import { LinkContainer } from 'react-router-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import { LinkContainer } from "react-router-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -29,7 +29,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Navbar bg="danger" variant="dark" expand="lg">
+        <Navbar sticky="top" bg="danger" variant="dark" expand="lg">
           <Container>
             <LinkContainer to="/">
               <Navbar.Brand>Stranger's Things</Navbar.Brand>

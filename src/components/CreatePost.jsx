@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { makePost } from "../api/ajax-helpers";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 const CreatePost = ({ userPosts, setUserPosts, token }) => {
   const [title, setTitle] = useState('');
@@ -11,7 +13,7 @@ const CreatePost = ({ userPosts, setUserPosts, token }) => {
     console.log(willDeliver);
   }, [willDeliver]);
   return (
-    <form onSubmit={(event) => {
+    <Form className="form m-5 p-3 border border-3 border-danger rounded" onSubmit={(event) => {
       event.preventDefault()
       const newPromise = makePost(token, title, description, price, location, willDeliver);
       Promise.all([newPromise])
@@ -28,12 +30,11 @@ const CreatePost = ({ userPosts, setUserPosts, token }) => {
       // }
     }}>
       <h2>Create Post</h2>
-      <fieldset>
-        <div>
-          <label htmlFor="title">
+        <Form.Group>
+          <Form.Label htmlFor="title">
             Title
-          </label>
-          <input
+          </Form.Label>
+          <Form.Control
             id="title"
             type="text"
             required
@@ -42,12 +43,13 @@ const CreatePost = ({ userPosts, setUserPosts, token }) => {
               setTitle(event.target.value);
             }}
           />
-        </div>
-        <div>
-          <label htmlFor="description">
+        </Form.Group>
+        <Form.Group>
+          <Form.Label htmlFor="description">
             Description
-          </label>
-          <textarea
+          </Form.Label>
+          <Form.Control
+          as="textarea" rows={3}
             id="description"
             required
             value={description}
@@ -55,12 +57,12 @@ const CreatePost = ({ userPosts, setUserPosts, token }) => {
               setDescription(event.target.value);
             }}
           />
-        </div>
-        <div>
-          <label htmlFor="price">
+        </Form.Group>
+        <Form.Group>
+          <Form.Label htmlFor="price">
             Price
-          </label>
-          <input
+          </Form.Label>
+          <Form.Control
             id="price"
             type="text"
             required
@@ -69,12 +71,12 @@ const CreatePost = ({ userPosts, setUserPosts, token }) => {
               setPrice(event.target.value);
             }}
           />
-        </div>
-        <div>
-          <label htmlFor="location">
+        </Form.Group>
+        <Form.Group>
+          <Form.Label htmlFor="location">
             Location
-          </label>
-          <input
+          </Form.Label>
+          <Form.Control
             id="location"
             type="text"
             value={location}
@@ -82,22 +84,21 @@ const CreatePost = ({ userPosts, setUserPosts, token }) => {
               setLocation(event.target.value);
             }}
           />
-        </div>
-        <div>
-          <label htmlFor="willDeliver">
+        </Form.Group>
+        <Form.Group>
+          <Form.Label htmlFor="willDeliver">
             Will Deliver
-          </label>
-          <input
+          </Form.Label>
+          <Form.Check
             id="willDeliver"
             type="checkbox"
             onChange={(event) => {
               setWillDeliver(!willDeliver);
             }}
           />
-        </div>
-        <button type="submit">Create Post</button>
-      </fieldset>
-    </form>
+        </Form.Group>
+        <Button className="m-2" variant="secondary" type="submit">Create Post</Button>
+    </Form>
   )
 }
 
