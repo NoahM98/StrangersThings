@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LoginForm from "./LoginForm";
 import Registration from "./Registration";
+import Button from 'react-bootstrap/Button';
 
 const Login = ({ isLoggedIn, setIsLoggedIn, token, setToken }) => {
   return (
@@ -13,11 +14,11 @@ const Login = ({ isLoggedIn, setIsLoggedIn, token, setToken }) => {
         :
         <>
           <h1>You are Logged In</h1>
-          <button onClick={() => {
+          <Button variant="secondary" onClick={() => {
             setIsLoggedIn(false);
             setToken('');
             localStorage.removeItem("token");
-          }}>Logout</button>
+          }}>Logout</Button>
         </>
       }
 

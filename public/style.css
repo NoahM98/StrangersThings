@@ -8,6 +8,10 @@
     padding: 0;
 }
 
+#navbar {
+    width: 100%;
+}
+
 #home-page {
     display: flex;
     height: 90vh;
@@ -30,23 +34,17 @@
     align-items: center;
 }
 
-#posts {
-    
-}
-
 @media (min-width: 901px) {
     .form {
         width: 800px;
     }
+
     #search-bar {
         width: 800px;
-
-
     }
 
     #posts {
         width: 800px;
-
     }
 
 }
@@ -55,9 +53,8 @@
     .form {
         width: 90%;
     }
+
     #search-bar {
         width: 80vw;
-
     }
 }
-

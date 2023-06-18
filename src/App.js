@@ -35,7 +35,7 @@ function App() {
               <Navbar.Brand>Stranger's Things</Navbar.Brand>
             </LinkContainer>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
+            <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
               <Nav className="mr-auto">
                 <LinkContainer to="/Home">
                   <Nav.Link>Home</Nav.Link>

@@ -30,74 +30,79 @@ const CreatePost = ({ userPosts, setUserPosts, token }) => {
       // }
     }}>
       <h2>Create Post</h2>
-        <Form.Group>
-          <Form.Label htmlFor="title">
-            Title
-          </Form.Label>
-          <Form.Control
-            id="title"
-            type="text"
-            required
-            value={title}
-            onChange={(event) => {
-              setTitle(event.target.value);
-            }}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label htmlFor="description">
-            Description
-          </Form.Label>
-          <Form.Control
-          as="textarea" rows={3}
-            id="description"
-            required
-            value={description}
-            onChange={(event) => {
-              setDescription(event.target.value);
-            }}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label htmlFor="price">
-            Price
-          </Form.Label>
-          <Form.Control
-            id="price"
-            type="text"
-            required
-            value={price}
-            onChange={(event) => {
-              setPrice(event.target.value);
-            }}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label htmlFor="location">
-            Location
-          </Form.Label>
-          <Form.Control
-            id="location"
-            type="text"
-            value={location}
-            onChange={(event) => {
-              setLocation(event.target.value);
-            }}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label htmlFor="willDeliver">
-            Will Deliver
-          </Form.Label>
-          <Form.Check
-            id="willDeliver"
-            type="checkbox"
-            onChange={(event) => {
-              setWillDeliver(!willDeliver);
-            }}
-          />
-        </Form.Group>
-        <Button className="m-2" variant="secondary" type="submit">Create Post</Button>
+      <Form.Group>
+        <Form.Label htmlFor="title">
+          Title
+        </Form.Label>
+        <Form.Control
+          id="title"
+          type="text"
+          required
+          value={title}
+          placeholder="title"
+          onChange={(event) => {
+            setTitle(event.target.value);
+          }}
+        />
+      </Form.Group>
+      <Form.Group>
+        <Form.Label htmlFor="description">
+          Description
+        </Form.Label>
+        <Form.Control
+          as="textarea"
+          rows={3}
+          id="description"
+          required
+          value={description}
+          placeholder="description"
+          onChange={(event) => {
+            setDescription(event.target.value);
+          }}
+        />
+      </Form.Group>
+      <Form.Group>
+        <Form.Label htmlFor="price">
+          Price
+        </Form.Label>
+        <Form.Control
+          id="price"
+          type="text"
+          required
+          value={price}
+          placeholder="price"
+          onChange={(event) => {
+            setPrice(event.target.value);
+          }}
+        />
+      </Form.Group>
+      <Form.Group>
+        <Form.Label htmlFor="location">
+          Location
+        </Form.Label>
+        <Form.Control
+          id="location"
+          type="text"
+          value={location}
+          placeholder="location"
+          onChange={(event) => {
+            setLocation(event.target.value);
+          }}
+        />
+      </Form.Group>
+      <Form.Group>
+        <Form.Label htmlFor="willDeliver">
+          Will Deliver
+        </Form.Label>
+        <Form.Check
+          id="willDeliver"
+          type="checkbox"
+          onChange={(event) => {
+            setWillDeliver(!willDeliver);
+          }}
+        />
+      </Form.Group>
+      <Button className="m-2" variant="secondary" type="submit">Create Post</Button>
     </Form>
   )
 }
