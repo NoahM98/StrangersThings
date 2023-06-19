@@ -43,6 +43,8 @@ const Posts = ({ isLoggedIn, token }) => {
   return (
     <div id="post-page">
       <h1>Posts</h1>
+          {isLoggedIn ?
+            <CreatePost userPosts={userPosts} setUserPosts={setUserPosts} token={token} /> : null}
       <Form id="search-bar" className="mb-3">
         <Form.Group>
           <Form.Label htmlFor="search">
@@ -56,9 +58,7 @@ const Posts = ({ isLoggedIn, token }) => {
             }} />
         </Form.Group>
       </Form>
-      {isLoggedIn ?
-        <CreatePost userPosts={userPosts} setUserPosts={setUserPosts} token={token} /> : null}
-      <div id="posts">
+      <div className="posts">
         {postsToDisplay.map((el) => {
           return (
             <PostCard key={el._id} userPosts={userPosts} setUserPosts={setUserPosts} isLoggedIn={isLoggedIn} token={token} el={el} />

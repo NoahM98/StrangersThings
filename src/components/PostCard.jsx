@@ -14,7 +14,7 @@ const PostCard = ({ userPosts, setUserPosts, isLoggedIn, token, el }) => {
     }, [userPosts]);
 
     return (
-        <Card>
+        <Card bg="light" className="mb-2" border="danger">
             <Card.Body>
                 <Card.Title>{el.title}</Card.Title>
                 <Card.Subtitle>{el.author.username}</Card.Subtitle>

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { myData } from "../api/ajax-helpers";
 import { deletePost } from "../api/ajax-helpers";
+import AuthorPost from "./AuthorPost";
+import Card from 'react-bootstrap/Card';
 
-const AuthorPosts = ({ token, myPosts, setMyPosts }) => {
+const Author = ({ token, myPosts, setMyPosts }) => {
   const [postId, setPostId] = useState('');
   const [myMessages, setMyMessages] = useState([]);
   const [username, setUsername] = useState('');
@@ -44,33 +46,13 @@ const AuthorPosts = ({ token, myPosts, setMyPosts }) => {
 
   }
   return (
-    <div>
+    <div className="posts">
       <div>
         <h2>My Posts</h2>
         {myPosts.length ?
           myPosts.map((el, ind) => {
             return (
-              <div key={ind + el}>
-                <h2>{el.title}</h2>
-                <h3>{el.author.username}</h3>
-                <p>Price: {el.price}</p>
-                <p>Description: {el.description}</p>
-                <p>Location: {el.location}</p>
-                <p>Will Deliver: {el.willDeliver ? "yes" : "no"}</p>
-                {el.messages.map((element) => {
-                  return (
-                    <div key={element._id}>
-                      <h4>From: {element.fromUser.username}</h4>
-                      <p>{element.content}</p>
-                    </div>
-                  )
-                })}
-                {/* <button>Update</button> */}
-                <button onClick={() => {
-                  setPostId(el._id);
-                  handleDelete(token, el._id);
-                }}>Delete</button>
-              </div>
+              <AuthorPost key={el._id+ind} el={el}/>
             )
           }) : null}
       </div>
@@ -78,11 +60,13 @@ const AuthorPosts = ({ token, myPosts, setMyPosts }) => {
         <h2>My Messages</h2>
         {myMessages.map((el, ind) => {
           return (
-            <div key={ind + el._id}>
-              <h3>To: {el.post.author.username}</h3>
-              <h4>For: {el.post.title}</h4>
-              <p>{el.content}</p>
-            </div>
+            <Card bg="light" className="mb-2" border="danger" key={ind + el._id}>
+              <Card.Body>
+              <Card.Title>To: {el.post.author.username}</Card.Title>
+              <Card.Subtitle>For: {el.post.title}</Card.Subtitle>
+              <Card.Text>{el.content}</Card.Text>
+              </Card.Body>
+            </Card>
           )
         })}
       </div>
@@ -90,4 +74,4 @@ const AuthorPosts = ({ token, myPosts, setMyPosts }) => {
   )
 }
 
-export default AuthorPosts;
+export default Author;

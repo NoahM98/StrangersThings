@@ -8,13 +8,14 @@
     padding: 0;
 }
 
+
 #navbar {
     width: 100%;
 }
 
 #home-page {
     display: flex;
-    height: 90vh;
+    height: 80vh;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -25,6 +26,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
 }
 
 #post-page {
@@ -32,6 +34,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
+}
+#profile-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
 }
 
 @media (min-width: 901px) {
@@ -43,7 +53,7 @@
         width: 800px;
     }
 
-    #posts {
+    .posts {
         width: 800px;
     }
 
@@ -56,5 +66,14 @@
 
     #search-bar {
         width: 80vw;
+    }
+
+    .posts {
+        width: 90%;
+    }
+
+    #home-page>h1,
+    #home-page>h2 {
+        font-size: 20px;
     }
 }

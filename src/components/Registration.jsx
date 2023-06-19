@@ -14,7 +14,7 @@ const Registration = ({ setIsLoggedIn, setToken }) => {
   }, [response]);
 
   return (
-    <Form className="form m-5 p-3 border border-3 border-danger rounded" onSubmit={async (event) => {
+    <Form className="form m-5 p-3 border border-3 border-danger rounded text-bg-light" onSubmit={async (event) => {
       event.preventDefault();
       if (username.length >= 6 && password.length >= 6 && password === confirmPassword &&
         !(username.indexOf(' ') >= 0) && !(password.indexOf(' ') >= 0)) {
