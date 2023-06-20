@@ -61,18 +61,21 @@ function App() {
             <Home />
           </Route>
           <Route path="/Posts">
-            <Posts isLoggedIn={isLoggedIn} token={token} />
+            <Posts
+              isLoggedIn={isLoggedIn}
+              token={token} />
           </Route>
           <Route path="/Login">
             <Login
               isLoggedIn={isLoggedIn}
               setIsLoggedIn={setIsLoggedIn}
               token={token}
-              setToken={setToken}
-            />
+              setToken={setToken} />
           </Route>
           <Route path="/Profile">
-            <Profile isLoggedIn={isLoggedIn} token={token} />
+            <Profile
+              isLoggedIn={isLoggedIn}
+              token={token} />
           </Route>
         </div>
       </div>

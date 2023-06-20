@@ -7,10 +7,12 @@ const Profile = ({ isLoggedIn, token }) => {
 
     return (
         <div id="profile-page">
-            <h1>Profile Page</h1>
             {isLoggedIn ?
                 <Author token={token} /> :
-                <h2>Please Log In</h2>}
+                <>
+                    <h1>Profile</h1>
+                    <h2>Please login</h2>
+                </>}
         </div>
     )
 }

@@ -15,9 +15,9 @@ const PostCard = ({ userPosts, setUserPosts, isLoggedIn, token, el }) => {
 
     return (
         <Card bg="light" className="mb-2" border="danger">
+            <Card.Header>{el.author.username}</Card.Header>
             <Card.Body>
                 <Card.Title>{el.title}</Card.Title>
-                <Card.Subtitle>{el.author.username}</Card.Subtitle>
                 <Card.Text>Price: {el.price}</Card.Text>
                 <Card.Text>Description: {el.description}</Card.Text>
                 <Card.Text>Location: {el.location}</Card.Text>
@@ -55,7 +55,9 @@ const PostCard = ({ userPosts, setUserPosts, isLoggedIn, token, el }) => {
                             <Form.Group>
                                 <Form.Label htmlFor="send-message">Send Message</Form.Label>
                                 <Form.Control
-                                    as="textarea" rows={2}
+                                    className="mb-2"
+                                    as="textarea"
+                                    rows={2}
                                     required
                                     value={message}
                                     onChange={(event) => {

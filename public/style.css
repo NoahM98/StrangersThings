@@ -44,6 +44,10 @@
     margin-top: 20px;
 }
 
+.posts>h1 {
+    text-align: center;
+}
+
 @media (min-width: 901px) {
     .form {
         width: 800px;

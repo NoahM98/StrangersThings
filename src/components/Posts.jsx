@@ -26,7 +26,6 @@ const Posts = ({ isLoggedIn, token }) => {
     if (post.title.includes(text) || post.description.includes(text) || post.price.includes(text) ||
       post.location.includes(text) || post.author.username.includes(text)) {
       return true;
-
     } else {
       return false;
     }
@@ -47,14 +46,17 @@ const Posts = ({ isLoggedIn, token }) => {
         <CreatePost userPosts={userPosts} setUserPosts={setUserPosts} token={token} /> : null}
       <Form id="search-bar" className="mb-3">
         <Form.Group>
-          <Form.Label htmlFor="search">
+          <Form.Label
+            htmlFor="search">
             Search Posts:
           </Form.Label>
-          <Form.Control id="search" type="text"
-            value={searchTerm} placeholder="search"
+          <Form.Control
+            id="search"
+            type="text"
+            value={searchTerm}
+            placeholder="search"
             onChange={(event) => {
               setSearchTerm(event.target.value);
-
             }} />
         </Form.Group>
       </Form>
