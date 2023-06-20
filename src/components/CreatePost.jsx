@@ -13,7 +13,7 @@ const CreatePost = ({ userPosts, setUserPosts, token }) => {
     console.log(willDeliver);
   }, [willDeliver]);
   return (
-    <Form className="form m-5 p-3 border border-3 border-danger rounded text-bg-light"  onSubmit={(event) => {
+    <Form className="form m-4 p-3 border border-3 border-danger rounded text-bg-light" onSubmit={(event) => {
       event.preventDefault()
       const newPromise = makePost(token, title, description, price, location, willDeliver);
       Promise.all([newPromise])

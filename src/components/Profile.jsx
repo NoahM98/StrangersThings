@@ -4,13 +4,12 @@ import Author from "./Author";
 
 
 const Profile = ({ isLoggedIn, token }) => {
-    const [myPosts, setMyPosts] = useState([]);
 
     return (
         <div id="profile-page">
             <h1>Profile Page</h1>
             {isLoggedIn ?
-                    <Author token={token} myPosts={myPosts} setMyPosts={setMyPosts} /> :
+                <Author token={token} /> :
                 <h2>Please Log In</h2>}
         </div>
     )

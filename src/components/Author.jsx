@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { myData } from "../api/ajax-helpers";
-import { deletePost } from "../api/ajax-helpers";
 import AuthorPost from "./AuthorPost";
 import Card from 'react-bootstrap/Card';
 
-const Author = ({ token, myPosts, setMyPosts }) => {
+const Author = ({ token }) => {
+  const [myPosts, setMyPosts] = useState([]);
   const [postId, setPostId] = useState('');
   const [myMessages, setMyMessages] = useState([]);
   const [username, setUsername] = useState('');
@@ -26,25 +26,11 @@ const Author = ({ token, myPosts, setMyPosts }) => {
         setUserId(res[0].data._id);
       })
   }, [])
+
   useEffect(() => {
     console.log(myMessages);
   }, [myMessages])
 
-  const handleDelete = async (token, id) => {
-    const result = await deletePost(token, id);
-    if (result.success === true) {
-      alert('You have successfully deleted your post.');
-      const newPosts = myPosts.filter((el) => {
-        return (
-          el._id !== postId
-        )
-      })
-      setMyPosts(newPosts);
-    } else {
-      alert('Not able to delete post.');
-    }
-
-  }
   return (
     <div className="posts">
       <div>
@@ -52,7 +38,7 @@ const Author = ({ token, myPosts, setMyPosts }) => {
         {myPosts.length ?
           myPosts.map((el, ind) => {
             return (
-              <AuthorPost key={el._id+ind} el={el}/>
+              <AuthorPost key={el._id + ind} el={el} postId={postId} setPostId={setPostId} token={token} myPosts={myPosts} setMyPosts={setMyPosts} />
             )
           }) : null}
       </div>
@@ -62,9 +48,9 @@ const Author = ({ token, myPosts, setMyPosts }) => {
           return (
             <Card bg="light" className="mb-2" border="danger" key={ind + el._id}>
               <Card.Body>
-              <Card.Title>To: {el.post.author.username}</Card.Title>
-              <Card.Subtitle>For: {el.post.title}</Card.Subtitle>
-              <Card.Text>{el.content}</Card.Text>
+                <Card.Title>To: {el.post.author.username}</Card.Title>
+                <Card.Subtitle>For: {el.post.title}</Card.Subtitle>
+                <Card.Text>{el.content}</Card.Text>
               </Card.Body>
             </Card>
           )

@@ -43,8 +43,8 @@ const Posts = ({ isLoggedIn, token }) => {
   return (
     <div id="post-page">
       <h1>Posts</h1>
-          {isLoggedIn ?
-            <CreatePost userPosts={userPosts} setUserPosts={setUserPosts} token={token} /> : null}
+      {isLoggedIn ?
+        <CreatePost userPosts={userPosts} setUserPosts={setUserPosts} token={token} /> : null}
       <Form id="search-bar" className="mb-3">
         <Form.Group>
           <Form.Label htmlFor="search">
