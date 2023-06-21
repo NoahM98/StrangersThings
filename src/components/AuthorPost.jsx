@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { deletePost } from "../api/ajax-helpers";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import UpdatePost from "./UpdatePost";
 
-const AuthorPost = ({ el, postId, setPostId, token, myPosts, setMyPosts }) => {
+const AuthorPost = ({ el, postId, setPostId, token, myPosts, setMyPosts, renderPage, setRenderPage }) => {
+  const [isUpdating, setIsUpdating] = useState(false);
 
   useEffect(() => {
     const newPosts = myPosts.filter((el) => {
@@ -43,10 +45,21 @@ const AuthorPost = ({ el, postId, setPostId, token, myPosts, setMyPosts }) => {
             </Card>
           )
         })}
-        {/* <button>Update</button> */}
-        <Button variant="secondary" onClick={() => {
+        <Button className="m-1" variant="secondary" onClick={() => {
           handleDelete(token, el._id);
         }}>Delete</Button>
+        <Button className="m-1" variant="secondary" onClick={() => {
+          setIsUpdating(!isUpdating);
+        }} >Update</Button>
+        {isUpdating ?
+          <UpdatePost
+            token={token}
+            el={el}
+            myPosts={myPosts}
+            setMyPosts={setMyPosts}
+            setIsUpdating={setIsUpdating}
+            renderPage={renderPage}
+            setRenderPage={setRenderPage} /> : null}
       </Card.Body>
     </Card>
   )

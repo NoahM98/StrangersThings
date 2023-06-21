@@ -8,7 +8,7 @@ const Author = ({ token }) => {
   const [postId, setPostId] = useState('');
   const [myMessages, setMyMessages] = useState([]);
   const [username, setUsername] = useState('');
-  const [userId, setUserId] = useState('');
+  const [renderPage, setRenderPage] = useState(false);
 
   useEffect(() => {
     const postsPromise = myData(token);
@@ -24,9 +24,9 @@ const Author = ({ token }) => {
         })
         setMyMessages(filteredMessages);
         setUsername(res[0].data.username);
-        setUserId(res[0].data._id);
+        // setUserId(res[0].data._id);
       })
-  }, [])
+  }, [renderPage])
 
   useEffect(() => {
     console.log(myMessages);
@@ -40,7 +40,16 @@ const Author = ({ token }) => {
         {myPosts.length ?
           myPosts.map((el, ind) => {
             return (
-              <AuthorPost key={el._id + ind} el={el} postId={postId} setPostId={setPostId} token={token} myPosts={myPosts} setMyPosts={setMyPosts} />
+              <AuthorPost
+                key={el._id + ind}
+                el={el}
+                postId={postId}
+                setPostId={setPostId}
+                token={token}
+                myPosts={myPosts}
+                setMyPosts={setMyPosts}
+                renderPage={renderPage}
+                setRenderPage={setRenderPage} />
             )
           }) : null}
       </div>

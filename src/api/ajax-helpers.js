@@ -159,3 +159,37 @@ export const postMessage = async (postId, token, message) => {
     console.error(err);
   }
 }
+
+export const updatePost = async (
+  token,
+  postId,
+  title,
+  description,
+  price,
+  location,
+  willDeliver
+) => {
+  try {
+    const response = await fetch(`${BASE_URL}/posts/${postId}`, {
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        post: {
+          title: title,
+          description: description,
+          price: price,
+          location: location,
+          willDeliver: willDeliver
+        }
+      })
+    });
+    const result = await response.json();
+    console.log(result);
+    return result
+  } catch (err) {
+    console.error(err);
+  }
+}

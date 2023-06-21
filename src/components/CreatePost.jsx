@@ -97,7 +97,7 @@ const CreatePost = ({ userPosts, setUserPosts, token }) => {
         <Form.Check
           id="willDeliver"
           type="checkbox"
-          onChange={(event) => {
+          onChange={() => {
             setWillDeliver(!willDeliver);
           }}
         />
