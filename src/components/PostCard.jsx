@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 
 
-const PostCard = ({ userPosts, setUserPosts, isLoggedIn, token, el }) => {
+const PostCard = ({ userPosts, isLoggedIn, token, el, username }) => {
     const [message, setMessage] = useState('');
     const [messageList, setMessageList] = useState([]);
 
@@ -30,7 +30,8 @@ const PostCard = ({ userPosts, setUserPosts, isLoggedIn, token, el }) => {
                     return (
                         <Card key={element._id + ind}>
                             <Card.Body>
-                                <Card.Title>From: {element.fromUser.username}</Card.Title>
+                                <Card.Title>From: {element.fromUser ?
+                                    element.fromUser.username : username}</Card.Title>
                                 <Card.Text>{element.content}</Card.Text>
                             </Card.Body>
                         </Card>
@@ -44,7 +45,7 @@ const PostCard = ({ userPosts, setUserPosts, isLoggedIn, token, el }) => {
                                 const response = await postMessage(el._id, token, message);
                                 console.log(response)
                                 if (response.success) {
-                                    // await setMessageList ([response.data.messages, ...messageList]);
+                                    setMessageList([...messageList, response.data.message]);
                                     alert(`You've sent a message to ${el.author.username}`)
                                 } else {
                                     alert('Failed send message');

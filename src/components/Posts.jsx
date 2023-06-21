@@ -1,26 +1,10 @@
 import React, { useState, useEffect } from "react";
 import PostCard from "./PostCard";
 import CreatePost from "./CreatePost";
-import { fetchPosts, authorizedFetchPosts } from "../api/ajax-helpers";
 import Form from 'react-bootstrap/Form';
 
-const Posts = ({ isLoggedIn, token }) => {
-  const [userPosts, setUserPosts] = useState([]);
+const Posts = ({ isLoggedIn, token, userPosts, setUserPosts, myPosts, setMyPosts, username }) => {
   const [searchTerm, setSearchTerm] = useState('');
-
-  useEffect(() => {
-    console.log(`LoggedIn: ${isLoggedIn}`)
-    if (isLoggedIn) {
-      const postsPromise = authorizedFetchPosts(token);
-      Promise.all([postsPromise])
-        .then(res => setUserPosts(res[0].data.posts));
-    } else {
-      const postsPromise = fetchPosts();
-      Promise.all([postsPromise])
-        .then(res => setUserPosts(res[0].data.posts));
-    }
-  }, [isLoggedIn])
-
 
   function postMatches(post, text) {
     if (post.title.includes(text) || post.description.includes(text) || post.price.includes(text) ||
@@ -32,7 +16,6 @@ const Posts = ({ isLoggedIn, token }) => {
   }
 
   const filteredPosts = userPosts.filter(post => postMatches(post, searchTerm));
-
   const postsToDisplay = searchTerm.length ? filteredPosts : userPosts;
 
   useEffect(() => {
@@ -43,7 +26,12 @@ const Posts = ({ isLoggedIn, token }) => {
     <div id="post-page">
       <h1>Posts</h1>
       {isLoggedIn ?
-        <CreatePost userPosts={userPosts} setUserPosts={setUserPosts} token={token} /> : null}
+        <CreatePost
+          userPosts={userPosts}
+          setUserPosts={setUserPosts}
+          token={token}
+          myPosts={myPosts}
+          setMyPosts={setMyPosts} /> : null}
       <Form id="search-bar" className="mb-3">
         <Form.Group>
           <Form.Label
@@ -63,7 +51,13 @@ const Posts = ({ isLoggedIn, token }) => {
       <div className="posts">
         {postsToDisplay.map((el) => {
           return (
-            <PostCard key={el._id} userPosts={userPosts} setUserPosts={setUserPosts} isLoggedIn={isLoggedIn} token={token} el={el} />
+            <PostCard
+              key={el._id}
+              userPosts={userPosts}
+              isLoggedIn={isLoggedIn}
+              token={token}
+              el={el}
+              username={username} />
           )
         })}
       </div>

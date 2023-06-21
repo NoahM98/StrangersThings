@@ -3,30 +3,11 @@ import { myData } from "../api/ajax-helpers";
 import AuthorPost from "./AuthorPost";
 import Card from 'react-bootstrap/Card';
 
-const Author = ({ token }) => {
-  const [myPosts, setMyPosts] = useState([]);
-  const [postId, setPostId] = useState('');
-  const [myMessages, setMyMessages] = useState([]);
-  const [username, setUsername] = useState('');
-  const [renderPage, setRenderPage] = useState(false);
+const Author = ({ token, userPosts, setUserPosts, myPosts, setMyPosts, myMessages, username }) => {
 
   useEffect(() => {
-    const postsPromise = myData(token);
-    Promise.all([postsPromise])
-      .then((res) => {
-        setUsername(res[0].username)
-        const filteredPosts = res[0].data.posts.filter((el) => {
-          return el.active;
-        })
-        setMyPosts(filteredPosts);
-        const filteredMessages = res[0].data.messages.filter((el) => {
-          return el.fromUser._id === res[0].data._id;
-        })
-        setMyMessages(filteredMessages);
-        setUsername(res[0].data.username);
-        // setUserId(res[0].data._id);
-      })
-  }, [renderPage])
+    console.log(myPosts)
+  }, [myPosts])
 
   useEffect(() => {
     console.log(myMessages);
@@ -43,13 +24,11 @@ const Author = ({ token }) => {
               <AuthorPost
                 key={el._id + ind}
                 el={el}
-                postId={postId}
-                setPostId={setPostId}
                 token={token}
                 myPosts={myPosts}
                 setMyPosts={setMyPosts}
-                renderPage={renderPage}
-                setRenderPage={setRenderPage} />
+                userPosts={userPosts}
+                setUserPosts={setUserPosts} />
             )
           }) : null}
       </div>

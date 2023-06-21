@@ -1,34 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makePost } from "../api/ajax-helpers";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-const CreatePost = ({ userPosts, setUserPosts, token }) => {
+const CreatePost = ({ userPosts, setUserPosts, token, myPosts, setMyPosts }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [location, setLocation] = useState('');
   const [willDeliver, setWillDeliver] = useState(false);
-  useEffect(() => {
-    console.log(willDeliver);
-  }, [willDeliver]);
+
+  const handleSubmit = async () => {
+    const result = await makePost(token, title, description, price, location, willDeliver);
+    if (result.success === true) {
+      alert("You successfully created a post!");
+      setUserPosts([result.data.post, ...userPosts]);
+      setMyPosts([...myPosts, result.data.post])
+      setTitle('');
+      setDescription('');
+      setPrice('');
+      setLocation('');
+      setWillDeliver(false);
+    } else {
+      alert("Failed to create post");
+    }
+  }
+
   return (
-    <Form className="form m-4 p-3 border border-3 border-danger rounded text-bg-light" onSubmit={(event) => {
-      event.preventDefault()
-      const newPromise = makePost(token, title, description, price, location, willDeliver);
-      Promise.all([newPromise])
-        .then((result) => {
-          console.log(result[0]);
-          setUserPosts([result[0].data.post, ...userPosts]);
-        })
-      // console.log(result.data.post);
-      // if (result.success === true) {
-      //   console.log("Valid Post");
-      //   await setUserPosts([result.data.post, ...userPosts]);
-      // } else {
-      //   console.log("Invalid Post");
-      // }
-    }}>
+    <Form className="form m-4 p-3 border border-3 border-danger rounded text-bg-light"
+      onSubmit={(event) => {
+        event.preventDefault()
+        handleSubmit();
+      }}>
       <h2>Create Post</h2>
       <Form.Group>
         <Form.Label htmlFor="title">

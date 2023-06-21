@@ -4,25 +4,26 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import UpdatePost from "./UpdatePost";
 
-const AuthorPost = ({ el, postId, setPostId, token, myPosts, setMyPosts, renderPage, setRenderPage }) => {
+const AuthorPost = ({ el, token, myPosts, setMyPosts, userPosts, setUserPosts }) => {
   const [isUpdating, setIsUpdating] = useState(false);
-
-  useEffect(() => {
-    const newPosts = myPosts.filter((el) => {
-      return el._id !== postId;
-    })
-    setMyPosts(newPosts);
-  }, [postId])
 
   const handleDelete = async (token, id) => {
     const result = await deletePost(token, id);
     if (result.success === true) {
       alert('You have successfully deleted your post.');
-      setPostId(id);
+      const newMyPosts = myPosts.filter((element) => {
+        return element._id !== el._id;
+      })
+      setMyPosts(newMyPosts);
+      const newUserPosts = userPosts.filter((element) => {
+        return element._id !== el._id;
+      })
+      setUserPosts(newUserPosts);
+      // setPostId(id);
     } else {
       alert('Not able to delete post.');
     }
-    setPostId('');
+    // setPostId('');
   }
 
   return (
@@ -58,8 +59,8 @@ const AuthorPost = ({ el, postId, setPostId, token, myPosts, setMyPosts, renderP
             myPosts={myPosts}
             setMyPosts={setMyPosts}
             setIsUpdating={setIsUpdating}
-            renderPage={renderPage}
-            setRenderPage={setRenderPage} /> : null}
+            userPosts={userPosts}
+            setUserPosts={setUserPosts} /> : null}
       </Card.Body>
     </Card>
   )

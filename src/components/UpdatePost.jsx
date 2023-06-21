@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { updatePost } from "../api/ajax-helpers";
 
-const UpdatePost = ({ token, el, myPosts, setMyPosts, setIsUpdating, renderPage, setRenderPage }) => {
+const UpdatePost = ({ token, el, myPosts, setMyPosts, setIsUpdating, userPosts, setUserPosts }) => {
     const [title, setTitle] = useState(el.title);
     const [description, setDescription] = useState(el.description);
     const [price, setPrice] = useState(el.price);
@@ -14,16 +14,24 @@ const UpdatePost = ({ token, el, myPosts, setMyPosts, setIsUpdating, renderPage,
         const response = await updatePost(token, el._id, title, description, price, location, willDeliver);
         if (response.success === true) {
             alert("Successfully updated your post");
-            // const newPosts = myPosts.map((element) => {
-            //     if (element._id === el._id) {
-            //         return response.data.post;
-            //     } else {
-            //         return element;
-            //     }
-            // })
-            // setMyPosts(newPosts);
+            response.data.post.messages = el.messages;
+            const newMyPosts = myPosts.map((element) => {
+                if (element._id === el._id) {
+                    return response.data.post;
+                } else {
+                    return element;
+                }
+            })
+            setMyPosts(newMyPosts);
+            const newUserPosts = userPosts.map((element) => {
+                if (element._id === el._id) {
+                    return response.data.post;
+                } else {
+                    return element;
+                }
+            })
+            setUserPosts(newUserPosts);
             setIsUpdating(false);
-            setRenderPage(!renderPage);
         } else if (response.success === false) {
             alert("Failed to updated post");
         }
