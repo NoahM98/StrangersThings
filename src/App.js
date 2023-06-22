@@ -95,7 +95,6 @@ function App() {
             <Login
               isLoggedIn={isLoggedIn}
               setIsLoggedIn={setIsLoggedIn}
-              token={token}
               setToken={setToken} />
           </Route>
           <Route path="/Profile">

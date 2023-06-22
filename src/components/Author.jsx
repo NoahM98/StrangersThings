@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { myData } from "../api/ajax-helpers";
+import React, { useEffect } from "react";
 import AuthorPost from "./AuthorPost";
 import Card from 'react-bootstrap/Card';
 

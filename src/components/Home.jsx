@@ -1,5 +1,4 @@
 import React from "react";
-import PostCards from "./PostCard.jsx";
 
 const Home = () => {
   return (

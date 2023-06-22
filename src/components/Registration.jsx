@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { registerUser } from "../api/ajax-helpers";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -7,11 +7,6 @@ const Registration = ({ setIsLoggedIn, setToken }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [response, setResponse] = useState('');
-
-  useEffect(() => {
-    console.log(response)
-  }, [response]);
 
   return (
     <Form className="form m-5 p-3 border border-3 border-danger rounded text-bg-light" onSubmit={async (event) => {
@@ -20,10 +15,12 @@ const Registration = ({ setIsLoggedIn, setToken }) => {
         !(username.indexOf(' ') >= 0) && !(password.indexOf(' ') >= 0)) {
         console.log("Valid Form")
         const result = await registerUser(username, password);
-        setResponse(result);
-        if (result.data.message) {
+        if (result.data !== null) {
           alert(result.data.message);
-        } else if (result.error.message) {
+          setIsLoggedIn(true);
+          setToken(result.data.token);
+          localStorage.setItem("token", result.data.token);
+        } else {
           alert(result.error.message);
         }
       } else {

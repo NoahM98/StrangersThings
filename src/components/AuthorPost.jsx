@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { deletePost } from "../api/ajax-helpers";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -19,11 +19,9 @@ const AuthorPost = ({ el, token, myPosts, setMyPosts, userPosts, setUserPosts })
         return element._id !== el._id;
       })
       setUserPosts(newUserPosts);
-      // setPostId(id);
     } else {
       alert('Not able to delete post.');
     }
-    // setPostId('');
   }
 
   return (

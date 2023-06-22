@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import LoginForm from "./LoginForm";
 import Registration from "./Registration";
 import Button from 'react-bootstrap/Button';
 
-const Login = ({ isLoggedIn, setIsLoggedIn, token, setToken }) => {
+const Login = ({ isLoggedIn, setIsLoggedIn, setToken }) => {
   return (
     <div id="login-page">
       {!isLoggedIn ?
